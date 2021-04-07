@@ -1,6 +1,6 @@
 (library
- (name compiler_enac)
- (public_name compiler_enac)
+ (name libcompiler)
+ (public_name libcompiler)
  (wrapped false)
  (private_modules Register Values)
  (libraries graphics))

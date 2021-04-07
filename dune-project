@@ -1,23 +1,23 @@
 (lang dune 2.8)
-(name compiler_enac)
+(name libcompiler)
 
 (generate_opam_files true)
 
 (package
- (name compiler_enac)
+ (name libcompiler)
  (version 2021)
  (synopsis "Library for the compiler workshop")
  (authors "Cyril Allignol <cyril.allignol@enac.fr>")
  (maintainers "Cyril Allignol <cyril.allignol@enac.fr>")
- (homepage "https://github.com/cyril-allignol/compiler-enac")
- (bug_reports "https://github.com/cyril-allignol/compiler-enac/issues")
- (source (github cyril-allignol/compiler-enac))
+ (homepage "https://github.com/CS-ENAC/libcompiler")
+ (bug_reports "https://github.com/CS-ENAC/libcompiler/issues")
+ (source (github CS-ENAC/libcompiler))
  (license GPL-3.0-or-later)
- (description "\| This is the library for the compiler workshop at ENAC."
-              "\| It provides modules for building an AST for the source"
-              "\| language, implementing instructions for the target"
-              "\| architecture, and executing the compiled programs on a"
-              "\| simulated processor."
+ (description "\| This is the library for the compiler workshop at ENAC.
+              "\| It provides modules for building an AST for the source
+              "\| language, implementing instructions for the target
+              "\| architecture, and executing the compiled programs on a
+              "\| simulated processor.
  )
  (depends menhir graphics)
 )
