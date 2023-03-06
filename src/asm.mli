@@ -30,72 +30,78 @@ val create_label : string -> label
 
 (** {3 Les instructions} *)
 
-type instruction
+type asm
+
+(** Une instruction qui ne fait rien *)
+val noop : asm
 
 (** [mov r1 r2]: [r1] <- [r2] *)
-val mov : register -> register -> instruction
+val mov : register -> register -> asm
 
 (** [imov n r]: la constante [n] est placée dans le registre [r] *)
-val imov : int -> register -> instruction
+val imov : int -> register -> asm
 
 (** [add r1 r2 r3]: [r1] <- [r2 + r3] *)
-val add : register -> register -> register -> instruction
+val add : register -> register -> register -> asm
 
 (** [sub r1 r2 r3]: [r1] <- [r2 - r3] *)
-val sub : register -> register -> register -> instruction
+val sub : register -> register -> register -> asm
 
 (** [mul r1 r2 r3]: [r1] <- [r2 * r3] *)
-val mul : register -> register -> register -> instruction
+val mul : register -> register -> register -> asm
 
 (** [div r1 r2 r3]: [r1] <- [r2 / r3] *)
-val div : register -> register -> register -> instruction
+val div : register -> register -> register -> asm
 
 (** [slt r1 r2 r3]: [r1] <- [r2 < r3] *)
-val slt : register -> register -> register -> instruction
+val slt : register -> register -> register -> asm
 
 (** [seq r1 r2 r3]: [r1] <- [r2 = r3] *)
-val seq : register -> register -> register -> instruction
+val seq : register -> register -> register -> asm
 
 (** Négation booléenne du registre [r] *)
-val neg : register -> instruction
+val neg : register -> asm
 
 (** [lda a r]: le contenu de l'adresse [a] est placé dans le registre [r] *)
-val lda : Memory.address -> register -> instruction
+val lda : Memory.address -> register -> asm
 
 (** [sta a r]: le contenu du registre [r] est stocké à l'adresse [a] *)
-val sta : Memory.address -> register -> instruction
+val sta : Memory.address -> register -> asm
 
 (** [Jmp a]: saute à l'adresse [a] dans le code *)
-val jmp : label -> instruction
+val jmp : label -> asm
 
 (** [brz a r] saute à l'adresse [a] si le contenu du registre [r] vaut 0 *)
-val brz : label -> register -> instruction
+val brz : label -> register -> asm
 
 (** [push r] empile le contenu du registre [r] *)
-val push : register -> instruction
+val push : register -> asm
 
 (** [pop r] dépile le sommet de pile dans le registre [r] *)
-val pop : register -> instruction
-
-(** [call a] saute à l'adresse [a] en empilant l'adresse de retour *)
-val call : Memory.address -> instruction
-
-(** [ret] revient à l'adresse de retour *)
-val ret : instruction
+val pop : register -> asm
 
 (**/**)
-val inp : register -> instruction
-val out : register -> instruction
+(** [call a] saute à l'adresse [a] en empilant l'adresse de retour *)
+val call : Memory.address -> asm
+
+(** [ret] revient à l'adresse de retour *)
+val ret : asm
+
+val inp : register -> asm
+val out : register -> asm
 (**/**)
 
 (** Arrêt du processus *)
-val hlt : instruction
+val hlt : asm
 
 (** Pseudo-instruction permettant de placer une étiquette dans le code *)
-val lbl : label -> instruction
+val lbl : label -> asm
 
 (** Le type des programmes ASM *)
-type program = instruction list
+type program = asm
+
+(** Concatène des instructions *)
+val ( & ) : asm -> asm -> asm
 
 (** Exécute le programme *)
 val exec : ?fast:bool -> program -> unit

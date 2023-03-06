@@ -118,29 +118,35 @@ let output_asm = fun file program ->
   fprint_asm (Format.formatter_of_out_channel ch) program;
   close_out ch
 
-let mov = fun r1 r2 -> Mov (r1, r2)
-let imov = fun n r -> IMov (n, r)
-let add = fun r1 r2 r3 -> Add (r1, r2, r3)
-let sub = fun r1 r2 r3 -> Sub (r1, r2, r3)
-let mul = fun r1 r2 r3 -> Mul (r1, r2, r3)
-let div = fun r1 r2 r3 -> Div (r1, r2, r3)
-let slt = fun r1 r2 r3 -> Slt (r1, r2, r3)
-let seq = fun r1 r2 r3 -> Seq (r1, r2, r3)
-let neg = fun r -> Neg r
-let lda = fun a r -> Lda (a, r)
-let sta = fun a r -> Sta (a, r)
-let jmp = fun lbl -> LblJmp lbl
-let brz = fun lbl r -> LblBrz (lbl, r)
-let push = fun r -> Push r
-let pop = fun r -> Pop r
-let call = fun a -> Call a
-let ret = Ret
-let inp = fun r -> In r
-let out = fun r -> Out r
-let hlt = Hlt
-let lbl = fun l -> Lbl l
+type asm = instruction list
+let list = fun x -> [x]
 
-type program = instruction list
+let noop = []
+let mov = fun r1 r2 -> Mov (r1, r2) |> list
+let imov = fun n r -> IMov (n, r) |> list
+let add = fun r1 r2 r3 -> Add (r1, r2, r3) |> list
+let sub = fun r1 r2 r3 -> Sub (r1, r2, r3) |> list
+let mul = fun r1 r2 r3 -> Mul (r1, r2, r3) |> list
+let div = fun r1 r2 r3 -> Div (r1, r2, r3) |> list
+let slt = fun r1 r2 r3 -> Slt (r1, r2, r3) |> list
+let seq = fun r1 r2 r3 -> Seq (r1, r2, r3) |> list
+let neg = fun r -> Neg r |> list
+let lda = fun a r -> Lda (a, r) |> list
+let sta = fun a r -> Sta (a, r) |> list
+let jmp = fun lbl -> LblJmp lbl |> list
+let brz = fun lbl r -> LblBrz (lbl, r) |> list
+let push = fun r -> Push r |> list
+let pop = fun r -> Pop r |> list
+let call = fun a -> Call a |> list
+let ret = Ret |> list
+let inp = fun r -> In r |> list
+let out = fun r -> Out r |> list
+let hlt = Hlt |> list
+let lbl = fun l -> Lbl l |> list
+
+type program = asm
+
+let ( & ) = ( @ )
 
 (* let rec remove_dup = function
  *   | [] -> []
