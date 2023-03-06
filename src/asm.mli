@@ -5,7 +5,7 @@
     la gestion de la mémoire et des branchements. *)
 
 (** {2 Registres} *)
-(** Le processeur simulé contient 4 registres : ax bx cx et dx *)
+(** Le processeur simulé contient 4 registres : [ax] [bx] [cx] et [dx] *)
 
 type register
 
@@ -68,7 +68,7 @@ val lda : Memory.address -> register -> asm
 (** [sta a r]: le contenu du registre [r] est stocké à l'adresse [a] *)
 val sta : Memory.address -> register -> asm
 
-(** [Jmp a]: saute à l'adresse [a] dans le code *)
+(** [jmp a]: saute à l'adresse [a] dans le code *)
 val jmp : label -> asm
 
 (** [brz a r] saute à l'adresse [a] si le contenu du registre [r] vaut 0 *)
