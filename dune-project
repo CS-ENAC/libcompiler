@@ -5,7 +5,7 @@
 
 (package
  (name libcompiler)
- (version 2021)
+ (version 2023)
  (synopsis "Library for the compiler workshop")
  (authors "Cyril Allignol <cyril.allignol@enac.fr>")
  (maintainers "Cyril Allignol <cyril.allignol@enac.fr>")
