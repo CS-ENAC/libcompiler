@@ -577,7 +577,7 @@ let exec_instr = fun instr st ->
   | Pop r ->
      let s = R.size_bytes r in
      incr SP s st
-     |> rset r (load (M.addr_of_int (rget SP st + 1 - s)) s st)
+     |> rset r (load (M.addr_of_int (rget SP st + 3 - s)) s st)
   | In r ->
      if st.input_ready
      then { st with input_ready = false } |> rset r (rget IN st)
